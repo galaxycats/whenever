@@ -5,11 +5,7 @@ module Whenever
   end
   
   def self.path
-    if defined?(RAILS_ROOT)
-      RAILS_ROOT 
-    elsif defined?(::RAILS_ROOT)
-      ::RAILS_ROOT
-    end
+    Rails.root if defined?(Rails)
   end
 
 end
