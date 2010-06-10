@@ -48,8 +48,19 @@ And you'll see your schedule.rb converted to cron sytax. Note: running `whenever
 
 == Capistrano integration
 
-In your "config/deploy.rb" file do something like:
+In your "config/deploy.rb" just require the capistrano tasks:
+  
+  require "whenever/capistrano"
 
+and add the role <code>cron</code> to your deployment configuration:
+  
+  role :cron, "your.server.com"
+  
+Now your crontab will be updated on every deployment on the specified host. You can check the generated crontab by calling <code>cap deploy:crontab:show</code> or generate it manually by calling <code>cap deploy:crontab:update</code>.
+(You should add "whenever" and "capistrano" to your <code>Gemfile</code> and always use <code>bundle exec "cap <task>"</code> to execute capistrano tasks.)
+
+If you want to have more control over the tasks you can define them yourself like this:
+  
   after "deploy:symlink", "deploy:update_crontab"
 
   namespace :deploy do
