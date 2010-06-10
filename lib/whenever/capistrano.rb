@@ -7,9 +7,9 @@ Capistrano::Configuration.instance(:must_exist).load do
       desc "Update the crontab file"
       task :update, :roles => :cron do
         if stage
-          run "cd #{release_path} && whenever --set environment=#{stage} --update-crontab #{application}"
+          run "cd #{release_path} && bundle exec \"whenever --set environment=#{stage} --update-crontab #{application}\""
         else
-          run "cd #{release_path} && whenever --update-crontab #{application}"
+          run "cd #{release_path} && bundle exec \"whenever --update-crontab #{application}\""
         end
       end
     
