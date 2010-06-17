@@ -1,5 +1,15 @@
 #!/usr/bin/env ruby
 
+begin
+  BOOT_PATH = File.expand_path('./config/boot')
+  ENV_PATH  = File.expand_path('./config/environment')
+
+  require BOOT_PATH
+  require ENV_PATH
+rescue LoadError
+  # no rails found, you have to set path manually [set :path, "/path/to/your/app"]
+end
+
 require 'rubygems'
 require 'optparse'
 require 'whenever'
